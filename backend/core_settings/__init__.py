@@ -1,0 +1,1 @@
+"""Core library configuration settings."""
