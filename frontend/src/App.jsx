@@ -38,7 +38,9 @@ import AdminSettings from './pages/admin/AdminSettings';
 const AppContent = () => {
   const { isAuthenticated, role, loading } = useAuth();
   const [activeTab, setActiveTab] = useState('dashboard');
-  const [publicPage, setPublicPage] = useState('home'); // 'home' | 'login' | 'register'
+  const [publicPage, setPublicPage] = useState(() => (
+    sessionStorage.getItem('library_session_active') === 'true' ? 'dashboard' : 'home'
+  )); // 'home' | 'login' | 'register' | 'dashboard'
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   if (loading) {
@@ -68,18 +70,24 @@ const AppContent = () => {
     );
   }
 
-  // Not authenticated: render public views
-  if (!isAuthenticated) {
+  const renderPublicView = () => {
+    const page = publicPage === 'dashboard' ? 'home' : publicPage;
+
     return (
       <div className="app-container" style={{ flexDirection: 'column' }}>
-        <Navbar onNavigate={(page) => setPublicPage(page === 'dashboard' ? 'home' : page)} />
+        <Navbar onNavigate={(nextPage) => setPublicPage(nextPage === 'dashboard' ? 'home' : nextPage)} />
         <main className="main-content">
-          {publicPage === 'home' && <HomePage onNavigate={setPublicPage} />}
-          {publicPage === 'login' && <LoginPage onNavigate={setPublicPage} />}
-          {publicPage === 'register' && <RegisterPage onNavigate={setPublicPage} />}
+          {page === 'home' && <HomePage onNavigate={setPublicPage} />}
+          {page === 'login' && <LoginPage onNavigate={setPublicPage} />}
+          {page === 'register' && <RegisterPage onNavigate={setPublicPage} />}
         </main>
       </div>
     );
+  };
+
+  // A persistent token does not bypass the landing page on a new tab.
+  if (!isAuthenticated || publicPage !== 'dashboard') {
+    return renderPublicView();
   }
 
   // Render role-specific views with route protection

@@ -17,6 +17,7 @@ export const AuthProvider = ({ children }) => {
       setToken(null);
       localStorage.removeItem('library_token');
       localStorage.removeItem('library_user');
+      sessionStorage.removeItem('library_session_active');
     };
 
     window.addEventListener('auth:unauthorized', handleUnauthorized);
@@ -34,6 +35,7 @@ export const AuthProvider = ({ children }) => {
           console.warn('Session check failed, clearing token');
           localStorage.removeItem('library_token');
           localStorage.removeItem('library_user');
+          sessionStorage.removeItem('library_session_active');
           setToken(null);
           setUser(null);
         }
@@ -48,6 +50,7 @@ export const AuthProvider = ({ children }) => {
     const { token: newToken, user: userData } = res.data;
     localStorage.setItem('library_token', newToken);
     localStorage.setItem('library_user', JSON.stringify(userData));
+    sessionStorage.setItem('library_session_active', 'true');
     setToken(newToken);
     setUser(userData);
     return userData;
@@ -58,6 +61,7 @@ export const AuthProvider = ({ children }) => {
     const { token: newToken, user: userData } = res.data;
     localStorage.setItem('library_token', newToken);
     localStorage.setItem('library_user', JSON.stringify(userData));
+    sessionStorage.setItem('library_session_active', 'true');
     setToken(newToken);
     setUser(userData);
     return userData;
@@ -73,6 +77,7 @@ export const AuthProvider = ({ children }) => {
     } finally {
       localStorage.removeItem('library_token');
       localStorage.removeItem('library_user');
+      sessionStorage.removeItem('library_session_active');
       setToken(null);
       setUser(null);
     }
