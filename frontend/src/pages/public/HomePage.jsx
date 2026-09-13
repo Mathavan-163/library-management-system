@@ -3,8 +3,8 @@ import { BookOpen, Shield, Users, ArrowRight, CheckCircle2 } from 'lucide-react'
 
 const HomePage = ({ onNavigate }) => {
   return (
-    <div style={{ minHeight: 'calc(100vh - 68px)', background: 'linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%)' }}>
-      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '4rem 1.5rem', textAlign: 'center' }}>
+    <div className="public-home" style={{ minHeight: 'calc(100vh - 68px)', background: 'linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%)' }}>
+      <div className="home-hero" style={{ maxWidth: '1100px', margin: '0 auto', padding: '4rem 1.5rem', textAlign: 'center' }}>
         <div style={{
           display: 'inline-flex',
           alignItems: 'center',
@@ -36,7 +36,7 @@ const HomePage = ({ onNavigate }) => {
           </button>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', textAlign: 'left' }}>
+        <div className="home-feature-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', textAlign: 'left' }}>
           <div className="card">
             <div style={{ width: '44px', height: '44px', borderRadius: '10px', background: '#eff6ff', color: '#2563eb', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' }}>
               <BookOpen size={24} />

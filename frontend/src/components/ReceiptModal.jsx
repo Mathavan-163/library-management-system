@@ -132,7 +132,7 @@ const ReceiptModal = ({ isOpen, onClose, receipt }) => {
         </div>
       </div>
 
-      <div className="no-print" style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.75rem', marginTop: '1.5rem' }}>
+      <div className="no-print receipt-actions" style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.75rem', marginTop: '1.5rem' }}>
         <button onClick={onClose} className="btn btn-secondary">
           Close
         </button>

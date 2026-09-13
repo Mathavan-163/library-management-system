@@ -170,15 +170,16 @@ const AdminDashboard = ({ onNavigate }) => {
       </div>
 
       {/* Recent Activity Tables */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(460px, 1fr))', gap: '1.5rem' }}>
-        <div className="card">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+      <div className="admin-recent-grid">
+        <div className="card admin-recent-card">
+          <div className="admin-recent-header">
             <h3 style={{ fontSize: '1.1rem' }}>Recent Loans</h3>
             <button onClick={() => onNavigate('borrows')} className="btn btn-secondary btn-sm">
               All Borrows <ArrowRight size={14} />
             </button>
           </div>
-          <table className="data-table">
+          <div className="admin-recent-table-wrap">
+            <table className="data-table">
             <thead>
               <tr>
                 <th>Borrow ID</th>
@@ -199,17 +200,19 @@ const AdminDashboard = ({ onNavigate }) => {
                 </tr>
               ))}
             </tbody>
-          </table>
+            </table>
+          </div>
         </div>
 
-        <div className="card">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+        <div className="card admin-recent-card">
+          <div className="admin-recent-header">
             <h3 style={{ fontSize: '1.1rem' }}>Recent Payments</h3>
             <button onClick={() => onNavigate('payments')} className="btn btn-secondary btn-sm">
               Payment Ledger <ArrowRight size={14} />
             </button>
           </div>
-          <table className="data-table">
+          <div className="admin-recent-table-wrap">
+            <table className="data-table">
             <thead>
               <tr>
                 <th>Payment ID</th>
@@ -230,7 +233,8 @@ const AdminDashboard = ({ onNavigate }) => {
                 </tr>
               ))}
             </tbody>
-          </table>
+            </table>
+          </div>
         </div>
       </div>
     </div>

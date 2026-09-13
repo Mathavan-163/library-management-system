@@ -39,6 +39,7 @@ const AppContent = () => {
   const { isAuthenticated, role, loading } = useAuth();
   const [activeTab, setActiveTab] = useState('dashboard');
   const [publicPage, setPublicPage] = useState('home'); // 'home' | 'login' | 'register'
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   if (loading) {
     return (
@@ -162,9 +163,21 @@ const AppContent = () => {
 
   return (
     <div className="app-container" style={{ flexDirection: 'column' }}>
-      <Navbar onNavigate={setActiveTab} />
+      <Navbar
+        onNavigate={setActiveTab}
+        onLogout={() => setPublicPage('home')}
+        onMenuToggle={() => setSidebarOpen((open) => !open)}
+      />
       <div style={{ display: 'flex', flex: 1, minHeight: 'calc(100vh - 68px)' }}>
-        <Sidebar activeTab={activeTab} onSelectTab={setActiveTab} />
+        <Sidebar
+          activeTab={activeTab}
+          onSelectTab={(tab) => {
+            setActiveTab(tab);
+            setSidebarOpen(false);
+          }}
+          isOpen={sidebarOpen}
+          onClose={() => setSidebarOpen(false)}
+        />
         <main className="main-content">
           {renderRoleView()}
         </main>

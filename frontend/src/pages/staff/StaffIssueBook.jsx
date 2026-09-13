@@ -136,7 +136,7 @@ const StaffIssueBook = () => {
             </div>
           </div>
 
-          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <div className="responsive-action-row" style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <button
               type="submit"
               disabled={loading || !selectedStudentId || !selectedBookId}

@@ -61,7 +61,7 @@ const PaymentModal = ({ isOpen, onClose, fine, onPaymentSuccess }) => {
 
         <div className="form-group">
           <label className="form-label">Select Payment Method</label>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
+          <div className="payment-method-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
             <button
               type="button"
               onClick={() => setMethod('ONLINE')}

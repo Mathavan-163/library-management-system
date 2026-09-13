@@ -6,7 +6,7 @@ import {
   FileText, BookPlus, BookDown, Tags, BarChart3, Settings
 } from 'lucide-react';
 
-const Sidebar = ({ activeTab, onSelectTab }) => {
+const Sidebar = ({ activeTab, onSelectTab, isOpen = false, onClose }) => {
   const { role } = useAuth();
 
   const studentNav = [
@@ -48,7 +48,9 @@ const Sidebar = ({ activeTab, onSelectTab }) => {
   const navItems = role === 'ADMIN' ? adminNav : role === 'STAFF' ? staffNav : studentNav;
 
   return (
-    <aside style={{
+    <>
+      <button className={`sidebar-overlay ${isOpen ? 'is-visible' : ''}`} onClick={onClose} aria-label="Close navigation menu" />
+      <aside className={`app-sidebar ${isOpen ? 'is-open' : ''}`} style={{
       width: '260px',
       background: '#0f172a',
       color: '#f8fafc',
@@ -110,7 +112,8 @@ const Sidebar = ({ activeTab, onSelectTab }) => {
       <div style={{ padding: '1rem', borderTop: '1px solid #1e293b', fontSize: '0.75rem', color: '#64748b', textAlign: 'center' }}>
         PostgreSQL Connected • v1.0
       </div>
-    </aside>
+      </aside>
+    </>
   );
 };
 

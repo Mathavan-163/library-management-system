@@ -1,9 +1,14 @@
 import React from 'react';
 import { useAuth } from '../context/AuthContext';
-import { BookOpen, LogOut, User as UserIcon, Shield, Briefcase, GraduationCap } from 'lucide-react';
+import { BookOpen, LogOut, User as UserIcon, Shield, Briefcase, GraduationCap, Menu } from 'lucide-react';
 
-const Navbar = ({ onNavigate }) => {
+const Navbar = ({ onNavigate, onLogout, onMenuToggle }) => {
   const { user, role, logout } = useAuth();
+
+  const handleLogout = async () => {
+    await logout();
+    onLogout?.();
+  };
 
   const getRoleBadge = () => {
     switch (role) {
@@ -41,7 +46,7 @@ const Navbar = ({ onNavigate }) => {
   };
 
   return (
-    <header style={{
+    <header className="app-navbar" style={{
       height: '68px',
       background: '#ffffff',
       borderBottom: '1px solid var(--border-color)',
@@ -53,7 +58,7 @@ const Navbar = ({ onNavigate }) => {
       top: 0,
       zIndex: 100
     }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', cursor: 'pointer' }} onClick={() => onNavigate('dashboard')}>
+      <div className="navbar-brand" style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', cursor: 'pointer' }} onClick={() => onNavigate('dashboard')}>
         <div style={{
           width: '40px',
           height: '40px',
@@ -78,8 +83,8 @@ const Navbar = ({ onNavigate }) => {
       </div>
 
       {user && (
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', textAlign: 'right' }}>
+        <div className="navbar-actions" style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+          <div className="navbar-user" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', textAlign: 'right' }}>
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'flex-end' }}>
                 <span style={{ fontSize: '0.9rem', fontWeight: 700, color: '#0f172a' }}>
@@ -112,11 +117,21 @@ const Navbar = ({ onNavigate }) => {
           </div>
 
           <button
-            onClick={logout}
+            onClick={handleLogout}
             className="btn btn-secondary btn-sm"
+            title="Log out"
             style={{ color: '#dc2626', borderColor: '#fecaca', background: '#fff5f5' }}
           >
             <LogOut size={16} /> Logout
+          </button>
+          <button
+            type="button"
+            className="mobile-menu-toggle"
+            onClick={onMenuToggle}
+            aria-label="Open navigation menu"
+            title="Open navigation menu"
+          >
+            <Menu size={21} />
           </button>
         </div>
       )}

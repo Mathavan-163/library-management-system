@@ -130,14 +130,14 @@ const LoginPage = ({ onNavigate }) => {
             <button
               type="button"
               className="btn btn-secondary btn-sm"
-              onClick={() => handleQuickLogin('admin', 'Admin@123')}
+              onClick={() => handleQuickLogin('admin', 'Admin@12345')}
             >
               Fill Admin
             </button>
             <button
               type="button"
               className="btn btn-secondary btn-sm"
-              onClick={() => handleQuickLogin('staff_jane', 'Staff@123')}
+              onClick={() => handleQuickLogin('staff', 'Staff@12345')}
             >
               Fill Staff
             </button>
